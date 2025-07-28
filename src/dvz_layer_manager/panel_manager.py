@@ -1,32 +1,32 @@
 """Manage visuals and layers in a panel."""
 
+import datoviz as dvz
+
 
 class PanelManager:
-    def __init__(self, panel):
-        self.panel = panel  # the panel to manage (dvz.Panel)
+    def __init__(self, panel: dvz.DvzPanel):
+        self.panel: dvz.DvzPanel = panel
 
-        self.visuals = {}  # string -> visual (dvz.Visual)
-        self.layers = {}  # string -> list of strings (visual names)
+        self.visuals: dict[str, dvz.DvzVisual] = {}
+        self.layers: dict[str, list[str]] = {}
 
-    def add_visual(self, name, visual):
+    def add_visual(self, name: str, visual: dvz.DvzVisual):
         self.visuals[name] = visual
         self.panel.add(visual)
 
-    def update_visual(self, name, property_name, value):
-        # Handle special cases that go directly to set_data parameters
+    def update_visual(self, name: str, property_name: str, value: any):
         if property_name == "depth_test":
             self.visuals[name].set_data(depth_test=value)
         elif property_name == "cull":
             self.visuals[name].set_data(cull=value)
         else:
-            # Handle dynamic properties via kwargs
-            kwargs = {property_name: value}
+            kwargs: dict[str, any] = {property_name: value}
             self.visuals[name].set_data(**kwargs)
 
-    def init_layer(self, name):
+    def init_layer(self, name: str):
         self.layers[name] = []
 
-    def add_to_layer(self, layer_name, key):
+    def add_to_layer(self, layer_name: str, key: str):
         if key not in self.visuals:
             raise ValueError(f"Key '{key}' not found in visuals.")
         if layer_name not in self.layers:
@@ -34,16 +34,12 @@ class PanelManager:
         if key not in self.layers[layer_name]:
             self.layers[layer_name].append(key)
         else:
-            print(
-                f"[PanelManager] Warning: Key '{key}' already exists in layer '{layer_name}'."
-            )
+            raise RuntimeError(f"Key '{key}' already exists in layer '{layer_name}'.")
 
-    def show_layer(self, layer_name):
+    def show_layer(self, layer_name: str):
         if layer_name not in self.layers:
             raise ValueError(f"Layer '{layer_name}' does not exist.")
-        # Hide all visuals
         for key in self.visuals:
             self.visuals[key].show(False)
-        # Show the visuals in the specified layer
         for key in self.layers[layer_name]:
             self.visuals[key].show(True)
