@@ -3,13 +3,13 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "python_package_template"
+name = "dvz_layer_manager"
 dynamic = ["version"]
-description = "A template Python package"
+description = "Layered visualization wrapper on top of Datoviz"
 readme = "README.md"
 license = {file = "LICENSE"}
 authors = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "Kshitij Goel", email = "kshitijgoel16061995@gmail.com"}
 ]
 requires-python = ">=3.8"
 dependencies = []
@@ -20,8 +20,8 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/python_package_template"
-Repository = "https://github.com/yourusername/python_package_template.git"
+Homepage = "https://github.com/kshitijgoel007/dvz_layer_manager"
+Repository = "https://github.com/kshitijgoel007/dvz_layer_manager.git"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -30,7 +30,7 @@ where = ["src"]
 "" = "src"
 
 [tool.setuptools.dynamic]
-version = {attr = "python_package_template.__version__"}
+version = {attr = "dvz_layer_manager.__version__"}
 
 # Commitizen configuration
 [tool.commitizen]
