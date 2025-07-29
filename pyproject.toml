@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dvz_layer_manager"
-dynamic = ["version"]
+version = "0.0.1"
 description = "Layered visualization wrapper on top of Datoviz"
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -36,9 +36,9 @@ version = {attr = "dvz_layer_manager.__version__"}
 
 # Commitizen configuration
 [tool.commitizen]
+version = "0.1.0"
 name = "cz_conventional_commits"
 tag_format = "v$version"
 version_scheme = "semver"
-version_provider = "pep621"
 update_changelog_on_bump = true
 major_version_zero = true
